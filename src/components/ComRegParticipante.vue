@@ -1,25 +1,7 @@
 <template>
  <div>
 
-<!--     <div>
-      <b-card
-        overlay
-        img-src="https://picsum.photos/900/250/?image=3"
-        img-alt="Card Image"
-        text-variant="white"
-        title="Image Overlay"
-        sub-title="Reporte de profesionales para vacunación Covid"
-      >
-        <b-card-text>
-          Bienvenidos a la página de registro de profesionales del anexo técnico THS310COVI.
-        </b-card-text>
-        <b-card-footer>
-          <b-button style="margin: 10px" size="sm" variant="success" v-b-modal.modalInsercion  @click="SetBanderaFormulario(1)" class="bg-info text-white" >Ingresar Personal a reportar</b-button>
-        </b-card-footer>
-      </b-card>
-    </div> -->
-
-        <b-card bg-variant="dark" text-variant="white" title="REPORTE FÁCIL THS ">
+     <b-card bg-variant="dark" text-variant="white" title="REPORTE FÁCIL THS ">
       <b-card-text>
         Bienvenido a tu reporte de profesional independiente.
       </b-card-text>
