@@ -1,7 +1,8 @@
 <template>
  <div>
 
-     <b-card bg-variant="dark" text-variant="white" title="REPORTE FÁCIL THS ">
+
+        <b-card bg-variant="dark" text-variant="white" title="REPORTE FÁCIL THS ">
       <b-card-text>
         Bienvenido a tu reporte de profesional independiente.
       </b-card-text>
@@ -415,38 +416,14 @@ export default {
   },
   validations: {
     form: {
-      nroid: {
-        required,
-        minLength: minLength(3),
-        maxLength: maxLength(17),
-        alphaNum,
-      },
+      nroid: {required,minLength: minLength(3),maxLength: maxLength(17),alphaNum},
       tipoid: { required },
-       codentidad: {
-        //required,
-        minLength: minLength(10),
-        maxLength: maxLength(10),
-        numeric,
-      }, 
-      nomentidad: {
-        required,
-        minLength: minLength(3),
-        maxLength: maxLength(100),
-      },
-      papellido: {
-        required,
-        minLength: minLength(3),
-        maxLength: maxLength(60),
-        alpha,
-      },
+       codentidad: {minLength: minLength(10), maxLength: maxLength(10),numeric}, 
+      nomentidad: {required,minLength: minLength(3),maxLength: maxLength(100)},
+      papellido: {required,minLength: minLength(3),maxLength: maxLength(60)},
       sapellido: { minLength: minLength(3), maxLength: maxLength(60), alpha },
-      pnombre: {
-        required,
-        minLength: minLength(3),
-        maxLength: maxLength(60),
-        alpha,
-      },
-      snombre: { minLength: minLength(3), maxLength: maxLength(60), alpha },
+      pnombre: {required, minLength: minLength(3), maxLength: maxLength(60)},
+      snombre: { minLength: minLength(3), maxLength: maxLength(60) },
       municipio: { required },
      // perfil: { required },
       areacovid: { required },
@@ -552,7 +529,7 @@ export default {
     },
 
     async EditarParticipante(Pid,PTipoRegistro,PTipoId,PNroId,PPrimerApellido,PSegundoApellido,PPrimerNombre,PSegundoNombre,PCodigoMunicipio,PCodigoPerfil,PCodigoEntidad,PNombreEntidad,PCodigoServicio,PCodigoAreaCovid,PCodigoDedicacion,PCodigoCargo,PIndicadorActualizacion,PFechaCorte,TipoForm){
-
+console.log("hola editar")
     if(PTipoRegistro == 2){
       PTipoRegistro = true
     }else
