@@ -288,8 +288,6 @@
                 <b-form-invalid-feedback  id="input-15-live-feedback">Indicador Actualización es Requerido</b-form-invalid-feedback>
                 </b-input-group> 
                 </b-form-group> 
-
-                
             </td>
         </tr>                                              
     </table>
@@ -309,8 +307,9 @@
      </template>
     </b-table>
   </div> 
+  
   <b-button variant="success" @click="EnviarPago()">Realiza el pago AQUI Y habilita el enlace de descarga</b-button>
-   <b-button style="margin: 10px" size="sm" variant="success" v-b-modal.modalInsercion  @click="SetBanderaFormulario(1)" class="bg-info text-white" >Ingresar Nuevo </b-button>
+  <b-button style="margin: 10px" size="sm" variant="success" v-b-modal.modalInsercion  @click="SetBanderaFormulario(1)" class="bg-info text-white" >Ingresar Nuevo </b-button>
 
       <div v-if="userLogged" class="mt-5">
         <b-button size="sm" variant="outline-danger" class="mr-2" @click=DownloadFile()>descargar</b-button>
