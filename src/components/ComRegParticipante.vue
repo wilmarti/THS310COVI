@@ -288,6 +288,8 @@
                 <b-form-invalid-feedback  id="input-15-live-feedback">Indicador Actualización es Requerido</b-form-invalid-feedback>
                 </b-input-group> 
                 </b-form-group> 
+
+                
             </td>
         </tr>                                              
     </table>
