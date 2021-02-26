@@ -58,37 +58,6 @@
                 </b-form-group>
                 
             </td>
-        <tr>            
-           <td>
-                <b-form-group id="group-1" label-for="input-1">
-                <b-input-group prepend="Tipo Id:" class="mb-2 mr-sm-2 mb-sm-0"> 
-                <b-form-select
-                id="input-1"
-                name="input-1"
-                v-model="$v.form.tipoid.$model"
-                :options="TiposId"
-                :state="validateState('tipoid')"
-                aria-describedby="input-1-live-feedback"
-                ></b-form-select>
-                <b-form-invalid-feedback  id="input-1-live-feedback">Tipo Id Requerido</b-form-invalid-feedback>
-                </b-input-group> 
-                </b-form-group>
-            </td>
-            <td>
-                <b-form-group id="group-2" label-for="input-2">
-                <b-input-group prepend="Nro Id:" class="mb-2 mr-sm-2 mb-sm-0">
-                <b-form-input
-                id="input-2"
-                name="input-2"
-                v-model="$v.form.nroid.$model"
-                :state="validateState('nroid')"
-                aria-describedby="input-2-live-feedback"
-                ></b-form-input>
-                <b-form-invalid-feedback id="input-2-live-feedback">Requerido mas de 3 números</b-form-invalid-feedback>
-                </b-input-group> 
-                </b-form-group>
-            </td>
-        </tr>
          <tr>            
            <td>
                 <b-form-group id="group-3" label-for="input-3">
@@ -119,7 +88,38 @@
                 </b-input-group> 
                 </b-form-group>
             </td>
-        </tr>     
+        </tr>  			
+        <tr>            
+           <td>
+                <b-form-group id="group-1" label-for="input-1">
+                <b-input-group prepend="Tipo Documento:" class="mb-2 mr-sm-2 mb-sm-0"> 
+                <b-form-select
+                id="input-1"
+                name="input-1"
+                v-model="$v.form.tipoid.$model"
+                :options="TiposId"
+                :state="validateState('tipoid')"
+                aria-describedby="input-1-live-feedback"
+                ></b-form-select>
+                <b-form-invalid-feedback  id="input-1-live-feedback">Tipo Id Requerido</b-form-invalid-feedback>
+                </b-input-group> 
+                </b-form-group>
+            </td>
+            <td>
+                <b-form-group id="group-2" label-for="input-2">
+                <b-input-group prepend="Nro Documento:" class="mb-2 mr-sm-2 mb-sm-0">
+                <b-form-input
+                id="input-2"
+                name="input-2"
+                v-model="$v.form.nroid.$model"
+                :state="validateState('nroid')"
+                aria-describedby="input-2-live-feedback"
+                ></b-form-input>
+                <b-form-invalid-feedback id="input-2-live-feedback">Requerido mas de 3 números</b-form-invalid-feedback>
+                </b-input-group> 
+                </b-form-group>
+            </td>
+        </tr>
          <tr>            
            <td>
                 <b-form-group id="group-5" label-for="input-5">
@@ -308,6 +308,7 @@
     </b-table>
   </div> 
   <b-button variant="success" @click="EnviarPago()">Realiza el pago AQUI Y habilita el enlace de descarga</b-button>
+   <b-button style="margin: 10px" size="sm" variant="success" v-b-modal.modalInsercion  @click="SetBanderaFormulario(1)" class="bg-info text-white" >Ingresar Nuevo </b-button>
 
       <div v-if="userLogged" class="mt-5">
         <b-button size="sm" variant="outline-danger" class="mr-2" @click=DownloadFile()>descargar</b-button>

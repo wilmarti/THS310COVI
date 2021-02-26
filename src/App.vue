@@ -13,8 +13,8 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item :to="{name:'login'}" >Ingresar</b-nav-item>
-        <b-nav-item :to="{name:'regparticipante'}">Gestionar Personal</b-nav-item>
-        <!-- <b-nav-item :to="{name:'regparticipante' ,query:{ref_payco: 1}}">Gestionar Personal</b-nav-item> -->
+        <!-- <b-nav-item :to="{name:'regparticipante'}">Gestionar Personal</b-nav-item> -->
+        <b-nav-item :to="{name:'regparticipante' ,query:{ref_payco: 1}}">Gestionar Personal</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
@@ -87,7 +87,7 @@ export default {
 
 
     },
-/*   watch: {
+   watch: {
     "$route.query.ref_payco" :{
       inmediate:true,
       handler(ref_payco){
@@ -102,7 +102,7 @@ export default {
       }
     }
 
-  } */
+  } 
 };
 </script>
 
