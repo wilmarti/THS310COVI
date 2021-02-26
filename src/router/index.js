@@ -32,7 +32,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ '../views/Register.vue')
     },
     {
-      path: '/regparticipante',
+      path: '/regparticipante/:id',
       name: 'regparticipante',
       component: () => import(/* webpackChunkName: "about" */ '../views/RegParticipante.vue')
     },

@@ -4,7 +4,7 @@
 
         <b-card bg-variant="dark" text-variant="white" title="REPORTE FÁCIL THS ">
       <b-card-text>
-        Bienvenido a tu reporte de profesional independiente.
+        Bienvenido a tu reporte de profesional independiente. {{$route.params.id}}
       </b-card-text>
       <b-button style="margin: 10px" size="sm" variant="success" v-b-modal.modalInsercion  @click="SetBanderaFormulario(1)" class="bg-info text-white" >Ingresar Personal a reportar</b-button>
     </b-card>
@@ -302,31 +302,25 @@
    <div>
     <b-table striped hover responsive sticky-header head-variant="light" :items="LlenarGrillaPersonas()" :fields="fields">
      <template v-slot:cell(Acciones_de_tabla)="data" >
-<!--        {{data.item}} -->
        <b-button size="sm" variant="outline-danger" class="mr-2" @click=EliminarParticipante(data.item.id)>Eliminar</b-button>
        <b-button size="sm" variant="outline-success" v-b-modal.modalInsercion class="mr-2" @click="EditarParticipante(data.item.id,data.item.TipoRegistro,data.item.TipoId,data.item.NroId,data.item.PrimerApellido,data.item.SegundoApellido,data.item.PrimerNombre,data.item.SegundoNombre,data.item.CodigoMunicipio,data.item.CodigoPerfil,data.item.CodigoEntidad,data.item.NombreEntidad,data.item.CodigoServicio,data.item.CodigoAreaCovid,data.item.CodigoDedicacion,data.item.CodigoCargo,data.item.IndicadorActualizacion,data.item.FechaCorte,2)" >Editar</b-button>
-       
-       <!-- <b-button size="sm" variant="outline-success" class="mr-2"  @click="EditarParticipante(data.item.id,data.item.TipoRegistro,data.item.TipoId,data.item.NroId,data.item.PrimerApellido,data.item.SegundoApellido,data.item.PrimerNombre,data.item.SegundoNombre,data.item.CodigoMunicipio,data.item.CodigoPerfil,data.item.CodigoEntidad,data.item.NombreEntidad,data.item.CodigoServicio,data.item.CodigoAreaCovid,data.item.CodigoDedicacion,data.item.CodigoCargo,data.item.IndicadorActualizacion,data.item.FechaCorte)">Editar</b-button> -->
      </template>
     </b-table>
   </div> 
-  <b-button variant="success">Realiza el pago AQUI Y habilita el enlace de descarga</b-button>
-   <b-button size="sm" variant="outline-danger" class="mr-2" @click=DownloadFile()>descargar</b-button>
+  <b-button variant="success" @click="EnviarPago()">Realiza el pago AQUI Y habilita el enlace de descarga</b-button>
+
+      <div v-if="userLogged" class="mt-5">
+        <b-button size="sm" variant="outline-danger" class="mr-2" @click=DownloadFile()>descargar</b-button>
+    </div>
+   
+
   <br/>
   <br/>
   <br/>
   <br/>
   </div> 
 
-  
-
-
-
-</template>
-
-
-
-   
+</template>  
 
 
 <script>
@@ -342,10 +336,51 @@ import auth from "@/auth";
 import {  required,  minLength,  alphaNum,  maxLength,  alpha,  numeric,} from "vuelidate/lib/validators";
 import download from 'downloadjs'
 
+
+
 export default {
   mixins: [validationMixin],
   data() {
     return {
+       //URLactual: window.location,
+       handler: ePayco.checkout.configure({
+        key: '45b960805ced5c27ce34b1600b4b9f54',
+        test: true
+      }), 
+      data:{
+          //Parametros compra (obligatorio)
+          name: "Consultoria THS",
+          description: "Consultoria THS",
+          invoice: "",
+          currency: "cop",
+          amount: "50000",
+          tax_base: "0",
+          tax: "0",
+          country: "co",
+          lang: "en",
+
+          //Onpage="false" - Standard="true"
+          external: "true",
+
+
+          //Atributos opcionales
+          extra1: "extra1",
+          extra2: "extra2",
+          extra3: "extra3",
+          confirmation: "http://localhost:8080/#/regparticipante/",
+          response: "http://localhost:8080/#/regparticipante/",
+
+          //Atributos cliente
+          name_billing: "Andres Perez",
+          address_billing: "Carrera 19 numero 14 91",
+          type_doc_billing: "cc",
+          mobilephone_billing: "3050000000",
+          number_doc_billing: "100000000",
+
+         //atributo deshabilitación metodo de pago
+          methodsDisable: ["TDC", "PSE","SP","CASH","DP"]
+
+          },
       CatPersonasGrilla:null,
       PersonasEntidad:null,
       BandFormulario:null,
@@ -442,11 +477,15 @@ export default {
 
    mounted(){
      console.log("entro okkkkkkkkkkkkkkkkkkkkk")
-      this.getPersonas();
-  },   
-
+      this.getPersonas();     
+  },  
 
   methods: {
+
+     EnviarPago(){
+       console.log("Hola Pago")    
+       this.handler.open(this.data)
+     },
 
       DownloadFile(){
 
@@ -503,9 +542,11 @@ export default {
       },
 
       getPersonas(){
+           console.log("hola persona")   
       axios.get('http://138.197.99.56/talento-humanos?_sort=TipoRegistro').then (response =>{
         this.PersonasEntidad = response.data;
-        this.CodEnti = this.userLogged.entidad;       
+        this.CodEnti = this.userLogged.entidad;
+        console.log(response.data)       
       })
       .catch (e => console.log(e))
     },
@@ -679,7 +720,23 @@ console.log("hola editar")
     userLogged() {       
       return auth.getUserLogged();
     } 
-  }  
+  },
+  props: {
+    msg: String
+  },
+/*    watch: {
+    "$route.query.URLactual" :{
+      inmediate:true,
+      handler(URLactual){
+        console.log(`URLactual a cambiado desde componente detectada:${URLactual}`);
+        if (URLactual == 1){            
+            this.urlapp = 'https://secure.epayco.co/validation/v1/reference/' + URLactual;
+            console.log("si es igual a 1:",this.urlapp );
+        }
+      }
+    }
+
+  }  */
 };
 </script>
 

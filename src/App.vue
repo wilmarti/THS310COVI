@@ -13,9 +13,8 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item :to="{name:'login'}" >Ingresar</b-nav-item>
-<!--         <b-nav-item :to="{name:'tregistro2'}">TipoRegistro2</b-nav-item>
-        <b-nav-item :to="{name:'tregistro3'}">TipoRegistro3</b-nav-item> -->
         <b-nav-item :to="{name:'regparticipante'}">Gestionar Personal</b-nav-item>
+        <!-- <b-nav-item :to="{name:'regparticipante' ,query:{ref_payco: 1}}">Gestionar Personal</b-nav-item> -->
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
@@ -45,7 +44,10 @@
    <b-container>
      <router-view/>
    </b-container> 
-
+<!--       <div v-if="this.band === true"> -->
+          <!-- <ComRegParticipante v-if="this.band" msg="REGISTRO DETALLE DEL TALENTO HUMANO ENSALUDxxx"/> -->
+<!--           
+      </div> -->
   </div>
 </template>
 
@@ -55,12 +57,21 @@
 <script>
 
 import auth from "@/auth";
+import ComRegParticipante from '@/components/ComRegParticipante.vue'
 
 export default {
   name: "Home",
+  data: () => ({
+    urlapp: "",
+    band: false
+  }),  
+
     beforeUpdate(){
       this.userLogged();
  },
+   components: {
+    ComRegParticipante
+  },
   methods:{
       async cerrarSession() {
       try {
@@ -76,9 +87,22 @@ export default {
 
 
     },
-  computed: {
+/*   watch: {
+    "$route.query.ref_payco" :{
+      inmediate:true,
+      handler(ref_payco){
+        console.log(`ref_payco a cambiado:${ref_payco}`);
+        //this.band = true;
+        //console.log("this.band",this.band);
+        //this.$router.push("/regparticipante/" + 1)
+        if (ref_payco == 1){            
+            this.urlapp = 'https://secure.epayco.co/validation/v1/reference/' + ref_payco;
+            console.log("si es igual a 1:",this.urlapp );
+        }
+      }
+    }
 
-  }
+  } */
 };
 </script>
 

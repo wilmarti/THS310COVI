@@ -3,7 +3,7 @@
 
   
     <div v-if="userLogged" class="mt-5">
-        <ComRegParticipante msg="REGISTRO DETALLE DEL TALENTO HUMANO ENSALUD"/>
+        <ComRegParticipante/>
     </div>
     <div v-else>
     <br/>
